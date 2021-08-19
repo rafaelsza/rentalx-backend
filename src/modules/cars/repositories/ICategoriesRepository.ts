@@ -1,4 +1,4 @@
-import Category from '../models/Category';
+import Category from '../entities/Category';
 
 export interface ICreateCategory {
   name: string;
@@ -6,7 +6,7 @@ export interface ICreateCategory {
 }
 
 export default interface ICategoriesRepository {
-  findAll(): Category[];
-  findByName(name: string): Category | undefined;
-  create(data: ICreateCategory): Category;
+  findAll(): Promise<Category[]>;
+  findByName(name: string): Promise<Category | undefined>;
+  create(data: ICreateCategory): Promise<Category>;
 }

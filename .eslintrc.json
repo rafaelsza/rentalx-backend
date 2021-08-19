@@ -19,6 +19,9 @@
   ],
   "rules": {
     "camelcase": "off",
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
     "no-use-before-define": "off",
     "no-useless-constructor": "off",
     "prettier/prettier": "error",

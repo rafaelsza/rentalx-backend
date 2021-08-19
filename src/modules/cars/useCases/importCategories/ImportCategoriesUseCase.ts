@@ -1,7 +1,7 @@
 import csvParse from 'csv-parse';
 import fs from 'fs';
 
-import Category from '../../models/Category';
+import Category from '../../entities/Category';
 import ICategoriesRepository from '../../repositories/ICategoriesRepository';
 
 interface IImportCategory {
@@ -12,7 +12,6 @@ interface IImportCategory {
 class ImportCategoriesUseCase {
   constructor(private categoriesRepository: ICategoriesRepository) {}
 
-  // eslint-disable-next-line
   loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
@@ -44,20 +43,22 @@ class ImportCategoriesUseCase {
 
     const categories: Category[] = [];
 
-    categoriesImported.forEach(async category => {
+    for (const category of categoriesImported) {
       const { name, description } = category;
 
-      const categoryAlreadyExists = this.categoriesRepository.findByName(name);
+      const categoryAlreadyExists = await this.categoriesRepository.findByName(
+        name,
+      );
 
       if (!categoryAlreadyExists) {
         categories.push(
-          this.categoriesRepository.create({
+          await this.categoriesRepository.create({
             name,
             description,
           }),
         );
       }
-    });
+    }
 
     return categories;
   }

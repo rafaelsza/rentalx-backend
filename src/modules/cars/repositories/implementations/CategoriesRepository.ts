@@ -1,39 +1,33 @@
-import Category from '../../models/Category';
+import { getRepository, Repository } from 'typeorm';
+
+import Category from '../../entities/Category';
 import ICategoriesRepository, {
   ICreateCategory,
 } from '../ICategoriesRepository';
 
 class CategoriesRepository implements ICategoriesRepository {
-  private categories: Category[];
+  private repository: Repository<Category>;
 
-  private static INSTANCE: CategoriesRepository;
-
-  private constructor() {
-    this.categories = [];
+  constructor() {
+    this.repository = getRepository(Category);
   }
 
-  public static getInstance(): CategoriesRepository {
-    if (!this.INSTANCE) {
-      this.INSTANCE = new CategoriesRepository();
-    }
+  async findAll(): Promise<Category[]> {
+    const repositories = await this.repository.find();
 
-    return this.INSTANCE;
+    return repositories;
   }
 
-  findAll(): Category[] {
-    return this.categories;
+  async findByName(name: string): Promise<Category | undefined> {
+    const repository = await this.repository.findOne({ name });
+
+    return repository;
   }
 
-  findByName(name: string): Category | undefined {
-    return this.categories.find(category => category.name === name);
-  }
+  async create({ name, description }: ICreateCategory): Promise<Category> {
+    const category = this.repository.create({ name, description });
 
-  create(data: ICreateCategory): Category {
-    const category = new Category();
-
-    Object.assign(category, { ...data });
-
-    this.categories.push(category);
+    await this.repository.save(category);
 
     return category;
   }
