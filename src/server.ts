@@ -6,6 +6,7 @@ import swaggerUI from 'swagger-ui-express';
 import appRoutes from './routes';
 
 import './database';
+import './shared/container';
 
 import doc from './docs/documentation.json';
 

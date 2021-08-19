@@ -6,6 +6,6 @@ export interface ICreateSpecification {
 }
 
 export default interface ISpecificationsRepository {
-  findByName(name: string): Specification | undefined;
-  create(data: ICreateSpecification): Specification;
+  findByName(name: string): Promise<Specification | undefined>;
+  create(data: ICreateSpecification): Promise<Specification>;
 }
