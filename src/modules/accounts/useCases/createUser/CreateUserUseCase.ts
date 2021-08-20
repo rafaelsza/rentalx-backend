@@ -6,6 +6,8 @@ import IUsersRepository from '../../repositories/IUsersRepository';
 
 import ICreateUserDTO from '../../dtos/ICreateUserDTO';
 
+import AppError from '../../../../errors/AppError';
+
 @injectable()
 class CreateUserUseCase {
   constructor(
@@ -22,7 +24,7 @@ class CreateUserUseCase {
     const emailAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (emailAlreadyExists) {
-      throw new Error('Email is already in use!');
+      throw new AppError('Email is already in use!');
     }
 
     const passwordHash = await hash(password, 8);
