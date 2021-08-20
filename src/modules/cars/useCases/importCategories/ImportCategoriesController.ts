@@ -11,7 +11,7 @@ class ListCategoriesController {
 
     const categories = await importCategoriesUseCase.execute(file);
 
-    return response.status(200).json(categories);
+    return response.status(201).json(categories);
   }
 }
 
