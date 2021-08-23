@@ -4,14 +4,14 @@ import 'express-async-errors';
 import express, { NextFunction, Request, Response } from 'express';
 import swaggerUI from 'swagger-ui-express';
 
-import AppError from './errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 import appRoutes from './routes';
 
-import './database';
-import './shared/container';
+import '@shared/infra/typeorm';
+import '@shared/container';
 
-import doc from './docs/documentation.json';
+import doc from '../../../docs/documentation.json';
 
 const app = express();
 app.use(express.json());
