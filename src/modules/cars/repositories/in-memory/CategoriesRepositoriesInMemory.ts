@@ -1,9 +1,9 @@
 import { v4 as uuidV4 } from 'uuid';
 
-import Category from '../../entities/Category';
+import Category from '@modules/cars/infra/typeorm/entities/Category';
 import ICategoriesRepository, {
   ICreateCategory,
-} from '../ICategoriesRepository';
+} from '@modules/cars/repositories/ICategoriesRepository';
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
   categories: Category[] = [];
