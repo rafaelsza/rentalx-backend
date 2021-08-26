@@ -1,4 +1,4 @@
-import Specification from '../entities/Specification';
+import Specification from '../infra/typeorm/entities/Specification';
 
 export interface ICreateSpecification {
   name: string;
@@ -6,6 +6,7 @@ export interface ICreateSpecification {
 }
 
 export default interface ISpecificationsRepository {
-  findByName(name: string): Promise<Specification | undefined>;
   create(data: ICreateSpecification): Promise<Specification>;
+  findByName(name: string): Promise<Specification | undefined>;
+  findByIds(ids: string[]): Promise<Specification[]>;
 }

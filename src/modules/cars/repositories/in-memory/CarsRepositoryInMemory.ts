@@ -16,6 +16,7 @@ class CarsRepositoryInMemory implements ICarsRepository {
     fine_amount,
     brand,
     category_id,
+    id,
   }: ICreateCarDTO): Promise<Car> {
     const car = new Car();
 
@@ -27,7 +28,7 @@ class CarsRepositoryInMemory implements ICarsRepository {
       fine_amount,
       brand,
       category_id,
-      id: uuidV4(),
+      id: id || uuidV4(),
       created_at: new Date(),
     });
 
