@@ -5,6 +5,7 @@ import categoriesRoutes from './categories.routes';
 import specificationsRoutes from './specifications.routes';
 import usersRoutes from './users.routes';
 import carsRoutes from './cars.routes';
+import rentalsRoutes from './rentals.routes';
 
 const appRoutes = Router();
 
@@ -13,5 +14,6 @@ appRoutes.use('/categories', categoriesRoutes);
 appRoutes.use('/specifications', specificationsRoutes);
 appRoutes.use('/users', usersRoutes);
 appRoutes.use('/cars', carsRoutes);
+appRoutes.use('/rentals', rentalsRoutes);
 
 export default appRoutes;
