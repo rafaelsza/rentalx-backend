@@ -4,6 +4,7 @@ import IRentalsRepository from '@modules/rentals/repositories/IRentalsRepository
 import Rental from '@modules/rentals/infra/typeorm/entities/Rental';
 import ICreateRentalDTO from '@modules/rentals/dtos/ICreateRentalDTO';
 
+import ICarsRepository from '@modules/cars/repositories/ICarsRepository';
 import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider';
 
 import AppError from '@shared/errors/AppError';
@@ -13,6 +14,9 @@ class CreateRentalUseCase {
   constructor(
     @inject('RentalsRepository')
     private rentalsRepository: IRentalsRepository,
+
+    @inject('CarsRepository')
+    private carsRepository: ICarsRepository,
 
     @inject('DateProvider')
     private dateProvider: IDateProvider,
@@ -55,6 +59,8 @@ class CreateRentalUseCase {
       car_id,
       expected_return_date,
     });
+
+    await this.carsRepository.updatedAvailable(car_id, false);
 
     return rental;
   }
