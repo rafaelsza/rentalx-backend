@@ -8,7 +8,7 @@
     "build": "tsc",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
