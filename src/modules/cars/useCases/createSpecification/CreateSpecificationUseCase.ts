@@ -22,7 +22,7 @@ class CreateSpecificationUseCase {
       await this.specificationsRepository.findByName(name);
 
     if (specificationAlreadyExists) {
-      throw new AppError('Category already exists!');
+      throw new AppError('Specification already exists!');
     }
 
     const specification = await this.specificationsRepository.create({
