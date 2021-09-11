@@ -12,6 +12,13 @@ services:
       - POSTGRES_DB=rentx
     volumes:
       - pgdata:/data/postgres
+
+  redis:
+    image: redis:alpine
+    container_name: redis-ignite
+    ports:
+      - 6379:6379
+
   app:
     build: .
     container_name: rentx

@@ -15,11 +15,15 @@ import appRoutes from './routes';
 import '@shared/container';
 
 import doc from '../../../docs/documentation.json';
+import rateLimiter from './middlewares/rateLimiter';
 
 createConnection();
 
 const app = express();
+
 app.use(express.json());
+
+app.use(rateLimiter);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(doc));
 app.use('/avatar', express.static(`${uploadConfig.tmpFolder}/avatar`));
