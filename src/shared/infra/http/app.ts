@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import express, { NextFunction, Request, Response } from 'express';
 import swaggerUI from 'swagger-ui-express';
+import cors from 'cors';
 
 import AppError from '@shared/errors/AppError';
 
@@ -24,6 +25,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(doc));
 app.use('/avatar', express.static(`${uploadConfig.tmpFolder}/avatar`));
 app.use('/cars', express.static(`${uploadConfig.tmpFolder}/cars`));
 
+app.use(cors());
 app.use(appRoutes);
 
 /* eslint-disable no-console */
